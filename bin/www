@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('airtng-node:server');
 var http = require('http');
+var mongoose = require('mongoose');
 
 /**
  * Get port from environment and store in Express.
@@ -88,3 +89,9 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+/**
+ * Initialize database connection.
+ */
+
+mongoose.connect('mongodb://localhost/airtng');
