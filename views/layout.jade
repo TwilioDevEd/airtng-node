@@ -2,6 +2,28 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    link(rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+    link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/authy-forms.css/2.2/form.authy.min.css')
+
+    link(rel='stylesheet', href='/stylesheets/main.css')
+    link(rel='stylesheet', href='/stylesheets/scaffolds.css')
+    link(rel='stylesheet', href='/stylesheets/app.css')
+  body.cover
+    block nav_bg
+    // navbar
+    nav.navbar.navbar-transparent
+      a.navbar-brand(href='/') airtng
+      ul.navbar-nav.navbar-right.pull-right
+        li
+          a(href='/') New Vacation Property
+        li
+          a(href='/') Log Out
+
+    block hero
+    section#main.push-nav
+      block content
+
+    footer
+      | Made with <i class="fa fa-heart"></i> by your pals <a href="http://www.twilio.com">@twilio</a>
+
