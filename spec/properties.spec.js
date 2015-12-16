@@ -21,7 +21,7 @@ describe('properties', function () {
   });
 
   describe('GET /properties', function () {
-    it('respond with ok', function (done) {
+    it('list all properties', function (done) {
       var property = new Property({ description, imageUrl });
 
       var result = property.save();
@@ -38,7 +38,7 @@ describe('properties', function () {
   });
 
   describe('GET /properties/new', function () {
-    it('respond with ok', function (done) {
+    it('shows create property form', function (done) {
       agent
         .get('/properties/new')
         .expect(function (response) {
@@ -64,6 +64,23 @@ describe('properties', function () {
           });
         })
         .expect(201, done);
+    });
+  });
+
+  describe('GET /properties/:id', function () {
+    it('shows a single property', function (done) {
+      var property = new Property({ description, imageUrl });
+
+      var result = property.save();
+      result.then(function () {
+        agent
+          .get('/properties/' + property._id)
+          .expect(function (response) {
+            expect(response.text).to.contain(description);
+            expect(response.text).to.contain(imageUrl);
+          })
+          .expect(200, done);
+        });
     });
   });
 });

@@ -10,9 +10,8 @@ html
     link(rel='stylesheet', href='/stylesheets/scaffolds.css')
     link(rel='stylesheet', href='/stylesheets/properties.css')
     link(rel='stylesheet', href='/stylesheets/app.css')
-  body
+  body(class=typeof cssBody === 'undefined' ? 'property-page' : '')
     block nav_bg
-    // navbar
     nav.navbar.navbar-transparent
       a.navbar-brand(href='/') airtng
       ul.navbar-nav.navbar-right.pull-right

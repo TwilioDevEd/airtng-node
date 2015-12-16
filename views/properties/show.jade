@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+  p#notice
+  .property-detail
+    .overview
+      img(src=property.imageUrl)
+
+    .container
+      h1= property.description
+      span
+        a(href='/') Edit
+
+      hr
+
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title Make a Reservation
+
+        .panel-body
+          form(action='/properties/update' method='post')
+            .form-group
+              label Would you like to say anything to the host?
+              textarea.form-control(
+                name='message'
+                placeholder='Hello! I am hoping to stay in your intergalactic suite...')
+            input(type='hidden' name='name')
+            input(type='hidden' name='phoneNumber')
+            input(type='hidden' name='propertyId')
+            button.btn.btn-primary(type='submit') Reserve Now
