@@ -1,0 +1,21 @@
+extends ../layout
+
+block nav_bg
+  nav.navbar.navbar-space
+
+block content
+  .container
+    h1 New Vacation Property
+    form(action='/properties' method='post')
+      .form-group
+        label Description
+        input.form-control(type='text' name='description')
+
+      .form-group
+        label Image URL
+        input.form-control(type='text' name='imageUrl')
+
+      .actions
+        button.btn.btn-lg.btn-primary(type='submit') Create Property
+
+    a(href='/') Back
