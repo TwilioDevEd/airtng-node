@@ -83,4 +83,46 @@ describe('properties', function () {
         });
     });
   });
+
+  describe('GET /properties/:id/edit', function () {
+    it('shows edit property form', function (done) {
+      var property = new Property({ description, imageUrl });
+
+      var result = property.save();
+      result.then(function () {
+        agent
+          .get('/properties/' + property._id + '/edit')
+          .expect(function (response) {
+            expect(response.text).to.contain(description);
+            expect(response.text).to.contain(imageUrl);
+          })
+          .expect(200, done);
+        });
+    });
+  });
+
+  describe('PUT /properties', function () {
+    it('update a property', function (done) {
+      var property = new Property({ description, imageUrl });
+      var updatedDescription = 'updated-description';
+
+      var result = property.save();
+      result.then(function () {
+        agent
+          .put('/properties')
+          .type('form')
+          .send({
+            description: updatedDescription,
+            imageUrl
+          })
+          .expect(function (response) {
+            Property.findOne({}).then(function(property) {
+              expect(property.description).to.equal(updatedDescription);
+              expect(property.imageUrl).to.equal(imageUrl);
+            });
+          })
+          .expect(204, done);
+        });
+    });
+  });
 });

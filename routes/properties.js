@@ -27,6 +27,21 @@ router
 
     res.sendStatus(201);
     res.send('done');
+  })
+  .get('/:id/edit', function (req, res) {
+    var propertyId = req.params.id;
+    Property.findOne({ _id: propertyId }).then(function (property) {
+      res.render('properties/edit', { property });
+    });
+  })
+  .put('/', function (req, res) {
+    var id = req.body.propertyId;
+    var description = req.body.description;
+    var imageUrl = req.body.imageUrl;
+    var property = new Property({ description, imageUrl });
+    property.save();
+
+    res.sendStatus(204);
   });
 
 module.exports = router;
