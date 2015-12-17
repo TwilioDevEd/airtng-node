@@ -22,11 +22,12 @@ router
   .post('/', function (req, res) {
     var description = req.body.description;
     var imageUrl = req.body.imageUrl;
-    var property = new Property({ description, imageUrl });
-    property.save();
 
-    res.sendStatus(201);
-    res.send('done');
+    var property = new Property({ description, imageUrl });
+    property.save()
+      .then(function (savedProperty) {
+        res.redirect('/properties/' + savedProperty.id);
+      });
   })
   .get('/:id/edit', function (req, res) {
     var propertyId = req.params.id;
@@ -34,14 +35,16 @@ router
       res.render('properties/edit', { property });
     });
   })
-  .put('/', function (req, res) {
+  .post('/update', function (req, res) {
     var id = req.body.propertyId;
     var description = req.body.description;
     var imageUrl = req.body.imageUrl;
-    var property = new Property({ description, imageUrl });
-    property.save();
 
-    res.sendStatus(204);
+    var property = new Property({ description, imageUrl });
+    property.save()
+      .then(function (savedProperty) {
+        res.redirect('/properties/' + savedProperty.id);
+      });
   });
 
 module.exports = router;

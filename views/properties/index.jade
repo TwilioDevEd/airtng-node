@@ -11,6 +11,6 @@ block content
     .row
       each property in properties
         .col-md-4
-          a.property(href='/')
+          a.property(href='/properties/' + property.id)
             img(src=property.imageUrl)
             h2= property.description

@@ -61,7 +61,7 @@ describe('properties', function () {
             expect(property.imageUrl).to.equal(imageUrl);
           });
         })
-        .expect(201, done);
+        .expect(302, done);
     });
   });
 
@@ -99,7 +99,7 @@ describe('properties', function () {
     });
   });
 
-  describe('PUT /properties', function () {
+  describe('POST /properties/update', function () {
     it('update a property', function (done) {
       var property = new Property({ description, imageUrl });
       var updatedDescription = 'updated-description';
@@ -107,7 +107,7 @@ describe('properties', function () {
       var result = property.save();
       result.then(function () {
         agent
-          .put('/properties')
+          .post('/properties/update')
           .type('form')
           .send({
             description: updatedDescription,
@@ -119,7 +119,7 @@ describe('properties', function () {
               expect(property.imageUrl).to.equal(imageUrl);
             });
           })
-          .expect(204, done);
+          .expect(302, done);
         });
     });
   });

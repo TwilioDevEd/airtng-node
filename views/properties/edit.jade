@@ -6,7 +6,7 @@ block nav_bg
 block content
   .container
     h1 Edit Vacation Property
-    form(action='/properties/update' method='put')
+    form(action='/properties/update' method='post')
       .form-group
         label Description
         input.form-control(type='text' name='description' value=property.description)
