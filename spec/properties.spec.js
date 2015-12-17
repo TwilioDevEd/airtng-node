@@ -101,26 +101,25 @@ describe('properties', function () {
 
   describe('POST /properties/update', function () {
     it('update a property', function (done) {
-      var property = new Property({ description, imageUrl });
       var updatedDescription = 'updated-description';
-
-      var result = property.save();
-      result.then(function () {
+      new Property({ description, imageUrl }).save()
+      .then(function (savedProperty) {
         agent
-          .post('/properties/update')
-          .type('form')
-          .send({
-            description: updatedDescription,
-            imageUrl
-          })
-          .expect(function (response) {
-            Property.findOne({}).then(function(property) {
-              expect(property.description).to.equal(updatedDescription);
-              expect(property.imageUrl).to.equal(imageUrl);
-            });
-          })
-          .expect(302, done);
-        });
+        .post('/properties/update')
+        .type('form')
+        .send({
+          propertyId: savedProperty.id,
+          description: updatedDescription,
+          imageUrl
+        })
+        .expect(function (response) {
+          Property.findOne({}).then(function(property) {
+            expect(property.description).to.equal(updatedDescription);
+            expect(property.imageUrl).to.equal(imageUrl);
+          });
+        })
+        .expect(302, done);
+      });
     });
   });
 });

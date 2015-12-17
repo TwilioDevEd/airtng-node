@@ -36,14 +36,16 @@ router
     });
   })
   .post('/update', function (req, res) {
-    var id = req.body.propertyId;
-    var description = req.body.description;
-    var imageUrl = req.body.imageUrl;
+    var propertyId = req.body.propertyId;
 
-    var property = new Property({ description, imageUrl });
-    property.save()
-      .then(function (savedProperty) {
-        res.redirect('/properties/' + savedProperty.id);
+    Property.findOne({ _id: propertyId })
+      .then(function (property) {
+        property.description = req.body.description;
+        property.imageUrl = req.body.imageUrl;
+
+        return property.save();
+      }).then(function (updatedProperty) {
+        return res.redirect('/properties/' + updatedProperty.id);
       });
   });
 

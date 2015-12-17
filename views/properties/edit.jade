@@ -7,6 +7,7 @@ block content
   .container
     h1 Edit Vacation Property
     form(action='/properties/update' method='post')
+      input(type='hidden' name='propertyId'  value=property.id)
       .form-group
         label Description
         input.form-control(type='text' name='description' value=property.description)
@@ -18,6 +19,6 @@ block content
       .actions
         button.btn.btn-lg.btn-primary(type='submit') Update Property
 
-    a(href='/') Show |
-    a(href='/') Back
+    a(href='/properties/' + property.id) Show |
+    a(href='/properties') Back
 
