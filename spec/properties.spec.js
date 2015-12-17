@@ -1,6 +1,4 @@
-var mongoose = require('mongoose');
-exports.mongoConnection = mongoose.connect('mongodb://localhost/test');
-
+require('./connectionHelper');
 var expect = require('chai').expect;
 var supertest = require('supertest');
 
