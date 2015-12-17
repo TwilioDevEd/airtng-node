@@ -8,18 +8,18 @@ router
     var propertyId = req.body.propertyId;
 
     Property.findOne({ _id: propertyId })
-      .then(function (property) {
-        var reservation = new Reservation({
-          name: req.body.name,
-          message: req.body.message,
-          status: req.body.status,
-          property: propertyId
-        });
-
-        reservation.save();
+    .then(function (property) {
+      var reservation = new Reservation({
+        name: req.body.name,
+        message: req.body.message,
+        status: 'pending',
+        property: propertyId
       });
 
-      res.sendStatus(201);
+      return reservation.save();
+    }).then(function (savedReservation) {
+      res.redirect('/properties');
+    });
   });
 
 module.exports = router;

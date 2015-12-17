@@ -18,13 +18,14 @@ block content
           h3.panel-title Make a Reservation
 
         .panel-body
-          form(action='/properties/update' method='post')
+          form(action='/reservations' method='post')
             .form-group
               label Would you like to say anything to the host?
               textarea.form-control(
                 name='message'
                 placeholder='Hello! I am hoping to stay in your intergalactic suite...')
-            input(type='hidden' name='name')
-            input(type='hidden' name='phoneNumber')
-            input(type='hidden' name='propertyId')
+            input(type='hidden' name='name' value='Bob')
+            input(type='hidden' name='status' value='pending')
+            input(type='hidden' name='phoneNumber' value='555-5555')
+            input(type='hidden' name='propertyId' value=property.id)
             button.btn.btn-primary(type='submit') Reserve Now

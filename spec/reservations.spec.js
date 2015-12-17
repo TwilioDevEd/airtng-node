@@ -47,7 +47,7 @@ describe('reservations', function () {
               expect(reservation.status).to.equal(status);
             });
           })
-          .expect(201, done);
+          .expect(302, done);
         });
     });
   });
