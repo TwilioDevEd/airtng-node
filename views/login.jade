@@ -1,0 +1,16 @@
+extends layout
+
+block nav_bg
+  nav.navbar.navbar-space
+
+block content
+  .container
+    h1 Login in
+    form(action="/sessions/login",method="post")
+      .form-group
+        label User name:
+        input.form-control(type='text', name="username")
+      .form-group
+        label Password:
+        input.form-control(type='password', name="password")
+      button.btn.btn-default(type='submit') Log In
