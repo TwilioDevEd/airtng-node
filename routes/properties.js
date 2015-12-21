@@ -1,23 +1,24 @@
 var express = require('express');
 var router = express.Router();
 var Property = require('../models/property');
+var middleware = require('../lib/middleware');
 
 // GET /properties
 router.get('/', function (req, res) {
   Property.find().then(function (properties) {
-    res.render('properties/index', { properties });
+    res.render('properties/index', { properties, user: req.user });
   });
 });
 
 // GET /properties/new
-router.get('/new', function (req, res) {
+router.get('/new', middleware.isAuthenticated, function (req, res) {
   Property.find().then(function (properties) {
     res.render('properties/new');
   });
 });
 
 // GET /properties/1
-router.get('/:id', function (req, res) {
+router.get('/:id', middleware.isAuthenticated, function (req, res) {
   var propertyId = req.params.id;
   Property.findOne({ _id: propertyId }).then(function (property) {
     res.render('properties/show', { property });
@@ -25,7 +26,7 @@ router.get('/:id', function (req, res) {
 });
 
 // POST /properties
-router.post('/', function (req, res) {
+router.post('/', middleware.isAuthenticated, function (req, res) {
   var description = req.body.description;
   var imageUrl = req.body.imageUrl;
 
@@ -37,7 +38,7 @@ router.post('/', function (req, res) {
 });
 
 // GET /properties/1/edit
-router.get('/:id/edit', function (req, res) {
+router.get('/:id/edit', middleware.isAuthenticated, function (req, res) {
   var propertyId = req.params.id;
   Property.findOne({ _id: propertyId }).then(function (property) {
     res.render('properties/edit', { property });
@@ -45,7 +46,7 @@ router.get('/:id/edit', function (req, res) {
 });
 
 // POST /properties/update
-router.post('/update', function (req, res) {
+router.post('/update', middleware.isAuthenticated, function (req, res) {
   var propertyId = req.body.propertyId;
 
   Property.findOne({ _id: propertyId })

@@ -20,7 +20,13 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 
 router.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/');
+  req.session.save(function (err) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.redirect('/sessions/login');
+  });
 });
 
 module.exports = router;

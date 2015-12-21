@@ -15,12 +15,21 @@ html
     nav.navbar.navbar-transparent
       a.navbar-brand(href='/') airtng
       ul.navbar-nav.navbar-right.pull-right
-        li
-          a(href='/properties/new') New Vacation Property
-        li
-          a(href='/') Log Out
+        if (user)
+          li
+            img(src='/images/spock.png')
+          li
+            a(href='/properties/new') New Vacation Property
+          li
+            a(href='/sessions/logout') Log Out
+        else
+          li
+            a(href='/users/new') Sign Up
+          li
+            a(href='/sessions/login') Log In
 
     block hero
+
     section#main.push-nav
       block content
 

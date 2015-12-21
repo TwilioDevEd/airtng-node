@@ -1,21 +1,28 @@
 require('./connectionHelper');
+var passport = require('passport');
+var passportStub = require('passport-stub');
 var expect = require('chai').expect;
 var supertest = require('supertest');
 
 var app = require('../app.js');
+passportStub.install(app);
 
 var Property = require('../models/property');
+var User = require('../models/user');
 var description = 'vacation-property';
 var imageUrl = 'http://images.com/example.png';
 var agent = supertest(app);
 
 describe('properties', function () {
   after(function(done) {
-    Property.remove({}, done);
+    Property.remove({});
+    User.remove({}, done);
   });
 
   beforeEach(function(done) {
-    Property.remove({}, done);
+    passportStub.login({username: 'Bob'});
+    Property.remove({});
+    User.remove({}, done);
   });
 
   describe('GET /properties', function () {
@@ -123,3 +130,24 @@ describe('properties', function () {
     });
   });
 });
+
+var user = new User({
+  email: 'me@example.com',
+  username: 'bob',
+  password: 's3cr3t',
+  countryCode: '+1',
+  phoneNumber: '555-5555'
+});
+
+var authenticateUser = function() {
+  user.save()
+  .then(function () {
+    agent
+    .post('/sessions/login')
+    .type('form')
+    .send({
+      username: user.username,
+      password: user.password
+    })
+  });
+}
