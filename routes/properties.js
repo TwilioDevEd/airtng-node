@@ -3,10 +3,15 @@ var router = express.Router();
 var Property = require('../models/property');
 var middleware = require('../lib/middleware');
 
+router.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+
 // GET /properties
 router.get('/', function (req, res) {
   Property.find().then(function (properties) {
-    res.render('properties/index', { properties, user: req.user });
+    res.render('properties/index', { properties });
   });
 });
 

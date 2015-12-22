@@ -55,10 +55,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-app.use(function(req, res, next) {
-  next({user: req.user});
-});
-
 // error handlers
 
 // development error handler
