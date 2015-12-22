@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Property = require('../models/property');
 var Reservation = require('../models/reservation');
+var notifier = require('../lib/notifier');
 
 // POST: /reservations
 router.post('/', function (req, res) {
@@ -17,9 +18,11 @@ router.post('/', function (req, res) {
     });
 
     return reservation.save();
-  }).then(function (savedReservation) {
+  }).then(function () {
+    notifier.sendNotification();
     res.redirect('/properties');
   }).catch(function(err) {
+    console.log('onErr');
     console.log(err);
   });
 });
