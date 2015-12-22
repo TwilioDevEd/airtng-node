@@ -95,3 +95,4 @@ function onListening() {
  */
 
 mongoose.connect('mongodb://localhost/airtng');
+mongoose.Promise = require('bluebird');

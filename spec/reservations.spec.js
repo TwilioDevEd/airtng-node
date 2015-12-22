@@ -26,9 +26,7 @@ describe('reservations', function () {
   describe('POST /reservations', function () {
     it ('creates a reservation', function (done) {
       var property = new Property({ description, imageUrl });
-      var name = 'name';
       var message = 'message';
-      var status = 'pending';
 
       property.save()
         .then(function (savedProperty) {
@@ -36,15 +34,13 @@ describe('reservations', function () {
           .post('/reservations')
           .type('form')
           .send({
-            name,
             message,
-            status,
             propertyId: savedProperty.id
           })
           .expect(function (response) {
             Reservation.findOne({}).then(function(reservation) {
-              expect(reservation.name).to.equal(name);
-              expect(reservation.status).to.equal(status);
+              expect(reservation.status).to.equal('pending');
+              expect(reservation.message).to.equal(message);
             });
           })
           .expect(302, done);

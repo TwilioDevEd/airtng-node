@@ -34,8 +34,9 @@ router.get('/:id', middleware.isAuthenticated, function (req, res) {
 router.post('/', middleware.isAuthenticated, function (req, res) {
   var description = req.body.description;
   var imageUrl = req.body.imageUrl;
+  var user = req.user;
 
-  var property = new Property({ description, imageUrl });
+  var property = new Property({ description, imageUrl, owner: user.id });
   property.save()
   .then(function (savedProperty) {
     res.redirect('/properties/' + savedProperty.id);
