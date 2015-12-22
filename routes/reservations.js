@@ -20,15 +20,17 @@ router.post('/', function (req, res) {
     });
 
     return reservation.save();
-  }).then(function () {
+  })
+  .then(function () {
     notifier.sendNotification();
     res.redirect('/properties');
-  }).catch(function(err) {
-    console.log('onErr');
+  })
+  .catch(function(err) {
     console.log(err);
   });
 });
 
+// POST: /reservations/handle
 router.post('/handle', twilio.webhook({validate: false}), function (req, res) {
   var from = req.body.From;
   var smsRequest = req.body.Body;

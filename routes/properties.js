@@ -61,7 +61,8 @@ router.post('/update', middleware.isAuthenticated, function (req, res) {
     property.imageUrl = req.body.imageUrl;
 
     return property.save();
-  }).then(function (updatedProperty) {
+  })
+  .then(function (updatedProperty) {
     return res.redirect('/properties/' + updatedProperty.id);
   });
 });

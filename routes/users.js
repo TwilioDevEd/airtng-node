@@ -5,10 +5,12 @@ var User = require('../models/user');
 
 var router = express.Router();
 
+// GET: /users/new
 router.get('/new', function(req, res) {
   res.render('users/new');
 });
 
+// POST: /users
 router.post('/', function(req, res) {
   User.register(new User({
     email:       req.body.email,
