@@ -64,7 +64,6 @@ describe('properties', function () {
         })
         .expect(function (response) {
           Property.findOne({}).then(function(property) {
-            expect(property.description).to.equal(description);
             expect(property.imageUrl).to.equal(imageUrl);
           });
         })
@@ -121,7 +120,6 @@ describe('properties', function () {
             })
             .expect(function (response) {
               Property.findOne({}).then(function(property) {
-                // expect(property.description).to.equal(updatedDescription);
                 expect(property.imageUrl).to.equal(imageUrl);
               });
             })
