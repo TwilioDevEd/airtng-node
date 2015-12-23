@@ -17,7 +17,7 @@
       1. A host creates a vacation property
       2. A guest requests a reservation on that property
       3. The host receives an SMS notifying them of the recent reservation
-         request. The host can either Accept or Reject the reservation.
+        request. The host can either Accept or Reject the reservation.
       4. The guest is notified that their reservation was either accepted or rejected.
 
       ## Building Blocks
@@ -30,3 +30,199 @@
 
       Let's get started! Click the right arrow to move on to the next step of
       the tutorial.
+
+  .step(data-title='Authentication', data-file='models/user.js')
+    :markdown
+      ## Authentication
+
+      For this workflow to work, we have to handle authentication, for this
+      purpose we're going to rely on [Passport](http://passportjs.org/) for
+      Node.js.
+
+      Each `User` will need to have a `countryCode` and a `phoneNumber` which
+      will be required to send sms notifications later. Otherwise for our
+      purposes we can use a pretty standard user model.
+
+      **See Also:**
+      * [Passport Local Mongoose](//github.com/saintedlama/passport-local-mongoose)
+      * [Mongoose Schemas](//mongoosejs.com/docs/guide.html)
+
+  .step(
+    data-title='Vacation Property',
+    data-file='models/property.js')
+    :markdown
+      ## Vacation Property
+      In order to build a true vacation rentals company we'll need a way to
+      create the property listings.
+
+      The `Property` belongs to the `User` who created it (we'll call
+      this user the _owner_ moving forward) and contains only two properties: a
+      `description` and an `imageUrl`.
+
+      **See Also:**
+      * [Plugin Passport-Local Mongoose](//github.com/saintedlama/passport-local-mongoose#plugin-passport-local-mongoose)
+
+  .step(data-title='Reservation', data-file='models/reservation.js')
+    :markdown
+      ## Reservation
+
+      The `Reservation` model is at the center of the workflow for this
+      application.
+
+      It is responsible for keeping track of:
+
+      * The `property` it is associated with.
+      * The `user` who owns that vacation property (the _host_). Through this
+      property will have access to its phone number.
+      * The `status` of the reservation.
+
+  .step(
+    data-title='Reservation Creation',
+    data-file='routes/reservations.js',
+    data-highlight='9-31')
+    :markdown
+      ## Reservation Creation
+
+      The reservation creation form holds only one field, the message that will
+      be sent to the _host_ user when reserving one of his properties. The rest
+      of the information necessary to create a reservation is taken from the
+      vacation property associated with.
+
+      A reservation is created with a default status `pending`, so when the
+      _host_ replies with an `accept` or `reject` response, the application
+      knows which reservation the _host_ is referring to.
+
+      In the next step we'll take a look at how the SMS notification is sent to
+      the host when the reservation is created.
+
+      **See Also:**
+
+      * [Promises](//howtonode.org/promises)
+
+  .step(
+    data-title='Notifying The Host',
+    data-file='lib/notifier.js',
+    data-highlight='5-28')
+    :markdown
+      ## Notifying The Host
+
+      When a reservation is created, we want to notify the owner of said
+      property that someone has made a reservation.
+
+      This is where we use [Twilio Node Helper
+      Library](//twilio.github.io/twilio-node/) to send a SMS message to the
+      _host_, using our [Twilio phone
+      number](//www.twilio.com/user/account/phone-numbers/incoming).
+
+      As you can see, sending SMS messages using Twilio is just a few lines of
+      code. Now we just have to wait for the host to send an SMS
+      response accepting or rejecting the reservation, so we can notify the
+      guest and host that the reservation information is updated accordingly.
+
+      The next step shows how to handle and configure the host's SMS response.
+
+      **See Also:**
+
+      * [Twilio Rest API](//www.twilio.com/docs/api/rest)
+      * [Introducing The Twilio Module For Node.js](//www.twilio.com/blog/2013/03/introducing-the-twilio-module-for-node-js.html)
+
+  .step(
+    data-title='Handling Incoming Messages',
+    data-file='routes/reservations.js',
+    data-highlight='33-60')
+    :markdown
+      ## Handling Incoming Messages
+
+      Let's take a closer look at the `reservations/handle` endpoint. This
+      endpoint handles our incoming Twilio request and does three things:
+
+      1. Checks for a pending reservation from the incoming user.
+      2. Updates the status of the reservation.
+      3. Responds to the host and sends notification to the guest.
+
+      **See Also:**
+      * [Secure Your Node.js Webhooks with Middleware fof Express](//www.twilio.com/blog/2014/01/secure-your-nodejs-webhooks-with-middleware-for-express-middleware.html)
+
+  .step(
+    data-title='Incoming Twilio Request',
+    data-file='routes/reservations.js',
+    data-highlight='82-111')
+    :markdown
+      ## Incoming Twilio Request
+
+      In your [Twilio
+      number](//www.twilio.com/user/account/phone-numbers/incoming) you must
+      setup the sms web hook to call your application's end point in the route
+      `reservations/handle`. Remember to to expose your development machine to
+      the outside world using [ngrok](//ngrok.com/). The url for the sms
+      web hook on your number should look like this:
+
+      ```
+      http://<subdomain>.ngrok.io/reservations/handle
+      ```
+
+      An incoming request from Twilio comes with some helpful
+      [parameters](//www.twilio.com/docs/api/twiml/sms/twilio_request#request-parameters).
+      These include the `From` phone number and the message `Body`.
+
+      We'll use the `From` parameter to lookup the host and check if she has any
+      pending reservations. If she does, we'll use the message body to check if
+      she accepted or rejected the reservation.
+
+      In the last step, we'll use [Twilio's
+      TwiML](//github.com/twilio/twilio-csharp/wiki/Twilio.Api#smsmessage-sendmessage-from-to-body)
+      as a response to Twilio's server instructing it to send a SMS messages to
+      the _guest_.
+
+  .step(
+    data-title='TwiML Response',
+    data-file='routes/reservations.js',
+    data-highlight='62,68')
+    :markdown
+      ## TwiML Response
+      After updating the reservation status, we must notify the _host_ that he/she
+      has successfully confirmed or rejected the reservation, or if there are no
+      pending reservations for that user, send a SMS saying this.
+
+      Also, if the reservation is _confirmed_ or _rejected_ we send an
+      additional SMS to the guest to inform the decision the host made,
+      regarding the property reservation.
+
+      We use the verb [Message](//www.twilio.com/docs/api/twiml/sms/message)
+      from TwiML to instruct Twilio's server that it should send the SMS
+      messages.
+
+      **See Also:**
+
+      * [TwiML Basics](http://twilio.github.io/twilio-node/#twimlBasic)
+
+  .step(data-title='Where to Next?')
+    :markdown
+      ## Where to Next?
+
+      Congrats! You just learned how to automate your workflow with Twilio SMS.
+
+      To improve upon this you could add anonymous communications so that the
+      host and guest could communicate through a shared Twilio phone number.
+      Hmmm... maybe we'll have to put together a tutorial on that.
+
+      If you're a Node.js developer working with Twilio, you might enjoy these
+      other tutorials:
+
+      [**IVR: Phone Tree**](//www.twilio.com/docs/tutorials/walkthrough/ivr-phone-tree/node/express)
+
+      Easily route callers to the right people and information with an IVR
+      (interactive voice response) system.
+
+      [**Automated Survey**](https://www.twilio.com/docs/tutorials/walkthrough/automated-survey/node/express)
+
+      Instantly collect structured data from your users with a survey conducted
+      over a voice call or SMS text messages.
+
+      ### Did this help?
+
+      Thanks for checking out this tutorial! If you have any feedback to share
+      with us, we'd love to hear it. Tweet
+      [@twilio](http://twitter.com/twilio) to let us know what you think.
+
+      ![Airtng](http://howtodocs.s3.amazonaws.com/airtng-screen2.png)
