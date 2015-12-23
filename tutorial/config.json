@@ -1,0 +1,6 @@
+{
+    "title": "Workflow Automation",
+    "repo": "TwilioDevEd/airtng-node",
+    "description": "Increase your rate of response by automating the workflows that are key to your business. In this tutorial, learn how to build a ready-for-scale automated SMS workflow, for a vacation rental company.",
+    "heroku": false
+}
