@@ -1,0 +1,32 @@
+.chapter(data-title='Workflow Automation')
+  .step(
+    data-title='Introduction',
+    data-file='lib/notifier.js',
+    data-highlight='16-26')
+    :markdown
+      ## Workflow Automation - Vacation Rental example
+
+      ![Airtng](http://howtodocs.s3.amazonaws.com/airtng-screen.png)
+
+      At its core this use-case is about enabling your service providers
+      (agents, hosts, customer service reps, administrators, etc) to better
+      serve their customer. To illustrate a very real-world example of this
+      use-case we will implement a webapp for finding and booking vacation
+      properties we're calling it Airtng. Here's how it works:
+
+      1. A host creates a vacation property
+      2. A guest requests a reservation on that property
+      3. The host receives an SMS notifying them of the recent reservation
+         request. The host can either Accept or Reject the reservation.
+      4. The guest is notified that their reservation was either accepted or rejected.
+
+      ## Building Blocks
+
+      We'll be using the Twilio REST API to implement this use-case:
+
+      * [Messages Resource](//www.twilio.com/docs/api/rest/sending-messages): We
+      will use Twilio directly to send our users messages at important
+      junctures.
+
+      Let's get started! Click the right arrow to move on to the next step of
+      the tutorial.
