@@ -23,14 +23,7 @@ describe('sessions', function () {
         agent
           .post('/sessions/login')
           .send({ username, password })
-          .expect(302)
-          .end(function (err, res) {
-            if (err) {
-              return done(err);
-            }
-
-            done();
-          });
+          .expect(302, done);
       });
   });
 });
