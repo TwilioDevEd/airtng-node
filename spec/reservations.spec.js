@@ -12,38 +12,47 @@ var agent = supertest(app);
 
 describe('reservations', function () {
   after(function(done) {
-    Property.remove({});
-    Reservation.remove({});
-    done();
+    Property.remove({})
+      .then(function() {
+        Reservation.remove({}, done);
+      });
   });
 
   beforeEach(function(done) {
-    Property.remove({});
-    Reservation.remove({});
-    done();
+    Property.remove({})
+      .then(function() {
+        Reservation.remove({}, done);
+      });
   });
 
   describe('POST /reservations', function () {
     it ('creates a reservation', function (done) {
       var property = new Property({ description, imageUrl });
       var message = 'message';
-
-      property.save()
-        .then(function (savedProperty) {
-          agent
-          .post('/reservations')
-          .type('form')
-          .send({
-            message,
-            propertyId: savedProperty.id
-          })
-          .expect(function (response) {
-            Reservation.findOne({}).then(function(reservation) {
-              expect(reservation.status).to.equal('pending');
-              expect(reservation.message).to.equal(message);
+      var reservation = new Reservation({message});
+      reservation
+        .save()
+        .then(function () {
+          property
+            .save()
+            .then(function (savedProperty) {
+              agent
+                .post('/reservations')
+                .type('form')
+                .send({
+                  message,
+                  propertyId: savedProperty.id
+                })
+              .expect(function (response) {
+                Reservation
+                  .findOne({})
+                  .then(function(reservation) {
+                    expect(reservation.status).to.equal('pending');
+                    expect(reservation.message).to.equal(message);
+                  });
+              })
+              .expect(302, done);
             });
-          })
-          .expect(302, done);
         });
     });
   });

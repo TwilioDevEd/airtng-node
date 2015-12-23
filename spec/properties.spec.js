@@ -15,14 +15,18 @@ var agent = supertest(app);
 
 describe('properties', function () {
   after(function(done) {
-    Property.remove({});
-    User.remove({}, done);
+    Property.remove({})
+      .then(function () {
+        User.remove({}, done);
+      });
   });
 
   beforeEach(function(done) {
     passportStub.login({username: 'Bob'});
-    Property.remove({});
-    User.remove({}, done);
+    Property.remove({})
+      .then(function () {
+        User.remove({}, done);
+      });
   });
 
   describe('GET /properties', function () {
