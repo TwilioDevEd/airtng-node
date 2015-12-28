@@ -21,5 +21,10 @@ block content
         input#authy-countries.form-control(type='text', name="countryCode")
       .form-group
         label Phone number:
-        input.form-control(type='text', name="phoneNumber")
+        .row
+          .col-md-2
+            input.form-control(type='text', name="areaCode", placeholder="Area Code")
+          .col-md-3
+            input.form-control(type='text', name="phoneNumber", placeholder="Phone Number")
+
       button.btn.btn-primary(type='submit') Sign up

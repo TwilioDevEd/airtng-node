@@ -16,6 +16,7 @@ router.post('/', function(req, res) {
     email:       req.body.email,
     username:    req.body.username,
     countryCode: req.body.countryCode,
+    areaCode:    req.body.areaCode,
     phoneNumber: req.body.phoneNumber
   }), req.body.password, function(err, user) {
     if (err) {

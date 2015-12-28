@@ -5,6 +5,7 @@ var Property = require('../models/property');
 var Reservation = require('../models/reservation');
 var User = require('../models/user');
 var notifier = require('../lib/notifier');
+var purchaser = require('../lib/purchaser');
 
 // POST: /reservations
 router.post('/', function (req, res) {
@@ -46,7 +47,21 @@ router.post('/handle', twilio.webhook({validate: false}), function (req, res) {
       throw 'No pending reservations';
     }
 
-    reservation.status = smsRequest.toLowerCase() === "accept" ? "confirmed" : "rejected";
+    var phoneNumber = purchaser.purchase('415');
+    var reservationPromise = Promise.resolve(reservation);
+
+    return Promise.all([phoneNumber, reservationPromise]);
+  })
+  .then(function (data) {
+    var phoneNumber = data[0];
+    var reservation = data[1];
+
+    if (isSmsRequestAccepted(smsRequest)) {
+      reservation.status = "confirmed";
+      reservation.phoneNumber = phoneNumber;
+    } else {
+      reservation.status = "rejected";
+    }
     return reservation.save();
   })
   .then(function (reservation) {
@@ -54,10 +69,15 @@ router.post('/handle', twilio.webhook({validate: false}), function (req, res) {
     respond(res, message);
   })
   .catch(function (err) {
+    console.log(err);
     var message = "Sorry, it looks like you do not have any reservations to respond to";
     respond(res, message);
   });
 });
+
+var isSmsRequestAccepted = function (smsRequest) {
+  return smsRequest.toLowerCase() === 'accept';
+};
 
 var respond = function(res, message) {
   var twiml = new twilio.TwimlResponse();
