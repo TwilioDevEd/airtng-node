@@ -1,6 +1,6 @@
 # AirTNG App: Part 1 - Workflow Automation with Twilio with Node.js and Express
 
-[![Build Status](https://travis-ci.org/TwilioDevEd/airtng-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/airtng-node)
+[![Build Status](https://travis-ci.org/TwilioDevEd/airtng-node.svg?branch=masked-numbers)](https://travis-ci.org/TwilioDevEd/airtng-node)
 
 Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This example app is a vacation rental site, where the host can confirm a reservation via SMS.
 
