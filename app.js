@@ -15,6 +15,7 @@ var users = require('./routes/users');
 var sessions = require('./routes/sessions');
 var properties = require('./routes/properties');
 var reservations = require('./routes/reservations');
+var commuter = require('./routes/commuter');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use('/users', users);
 app.use('/properties', properties);
 app.use('/reservations', reservations);
 app.use('/sessions', sessions);
+app.use('/commuter', commuter);
 
 var User = require('./models/user');
 passport.use(new LocalStrategy(User.authenticate()));
