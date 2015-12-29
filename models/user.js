@@ -6,9 +6,9 @@ var userSchema = new mongoose.Schema({
   username:    { type: String, required: true },
   password:    { type: String },
   countryCode: { type: String, required: true },
-  areaCode:    { type: String, required: true },
+  areaCode:    { type: String, required: false },
   phoneNumber: { type: String, required: true },
-  date:        { type: Date, default: Date.now },
+  date:        { type: Date,   default: Date.now },
 });
 
 userSchema.plugin(passportLocalMongoose);
