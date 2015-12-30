@@ -32,3 +32,161 @@
       * [Mongoose](//mongoosejs.com/)
       * [Passport](//passportjs.org/)
       * [The Twilio Node Helper Library](//twilio.github.io/twilio-node/)
+
+  .step(data-title='Create a Reservation',
+    data-file='routes/reservations.js',
+    data-highlight='10-32')
+    :markdown
+      ## Create a Reservation
+
+      The first step in connecting a guest and host is creating a reservation.
+      Here, we handle a form submission for a new reservation which contains the
+      message, the _guest's_ information is pulled out from the logged user.
+
+      ---
+
+      **See Also:**
+
+      * [Express Routing](//expressjs.com/en/guide/routing.html)
+
+  .step(data-title='Confirm the Reservation',
+    data-file='routes/reservations.js',
+    data-highlight='34-76')
+    :markdown
+      ## Confirm the Reservation
+
+      Before the reservation is finalized, the host needs to confirm that the property
+      was reserved. Learn how to automate this process in our first AirTNG
+      tutorial, [Workflow Automation](//github.com/TwilioDevEd/airtng-node).
+
+      Once the reservation is confirmed, we need to purchase a Twilio number that
+      the _guest_ and _host_ can use to communicate.
+
+      Next we'll take a look at how we find and purchase this shared phone number.
+
+  .step(data-title="Purchase a Twilio Number",
+    data-file='lib/purchaser.js')
+    :markdown
+      ## Purchase a Twilio Number
+
+      Here we use a [Twilio Node Helper
+      Library](//twilio.github.io/twilio-node/) to search for and buy a new
+      phone number to associate with the reservation. When we buy the number, we
+      designate a [Twilio
+      Application](//www.twilio.com/docs/api/rest/applications) that will handle
+      [webhook](//en.wikipedia.org/wiki/Webhook) requests when the new number
+      receives an incoming call or text.
+
+      We then save the new phone number on our `reservation` model, so when our
+      app receives calls or texts to this number, we'll know which reservation
+      the call or text belongs to.
+
+      ---
+
+      **See Also:**
+
+      * [Searching for Available Numbers](//www.twilio.com/docs/api/rest/available-phone-numbers)
+      * [Purchase a Phone Number with the REST API](//www.twilio.com/docs/api/rest/incoming-phone-numbers)
+      * [Create an Application in your account portal](//www.twilio.com/user/account/apps)
+      * [Using Promises In The Twilio Module For Node.js](https://www.twilio.com/blog/2013/11/using-promises-in-the-twilio-module-for-node-js.html)
+
+  .step(data-title="Find a Reservation",
+    data-file='routes/commuter.js',
+    data-highlight='42-59')
+    :markdown
+      ## Find a Reservation
+
+      When someone sends an SMS or calls one of the Twilio numbers you have
+      configured, Twilio makes a request to the URL you set in the Twiml app. In
+      this request, Twilio includes some useful information including:
+
+      * The `From` number that originally called or sent an SMS.
+      * The `To` Twilio number that triggered this request.
+
+      Take a look at [Twilio's SMS
+      Documentation](//www.twilio.com/docs/api/twiml/sms/twilio_request#request-parameters)
+      and [Twilio's Voice
+      Documentation](//www.twilio.com/docs/api/twiml/twilio_request#synchronous-request-parameters)
+      for a full list of the parameters you can use.
+
+      In our controller we use the `to` parameter sent by Twilio to find a reservation
+      that has the number we bought stored in it, as this is the number both hosts
+      and guests will call and send SMS to.
+
+      ---
+
+      **See Also:**
+      * [Mongoose Deep Populate](//github.com/buunguyen/mongoose-deep-populate)
+
+  .step(data-title="Connect Via SMS",
+    data-file='routes/commuter.js',
+    data-highlight='6-20')
+    :markdown
+      ## Connect Via SMS
+
+      Our [Twilio application](//www.twilio.com/docs/api/rest/applications)
+      should be configured to [send HTTP
+      requests](//www.twilio.com/docs/api/twiml/twilio_request) to this
+      controller method on any incoming text message. Our app responds with
+      [TwiML](//www.twilio.com/docs/api/twiml) to tell Twilio what to do in
+      response to the message.
+
+      If the initial message sent to the anonymous number was sent by the host,
+      we forward it on to the guest. Conversely, if the original message was
+      sent by the guest, we forward it to the host.
+
+      _To find the outgoing number we'll use the `gatherOutgoingNumber` helper
+      method._
+
+      ---
+
+      **See Also:**
+
+      * [The Message TwiML verb](//www.twilio.com/docs/api/twiml/sms/message)
+      * [Your message logs in the account portal](//www.twilio.com/user/account/log/messages)
+
+  .step(data-title="Connect Via Phone Call",
+    data-file='routes/commuter.js',
+    data-highlight='22-37')
+    :markdown
+      ## Connect Via Phone Call
+
+      Our [Twilio application](//www.twilio.com/docs/api/rest/applications)
+      will [send HTTP requests](//www.twilio.com/docs/api/twiml/twilio_request) 
+      to this method on any incoming voice call. Our app responds with 
+      [TwiML instructions](//www.twilio.com/docs/api/twiml)
+      that tell Twilio to `Play` an introductory MP3 audio file and then
+      `Dial` either the guest or host, depending on who initiated the call.
+
+      ---
+
+      **See Also:**
+      * [TwiML Dial verb](//www.twilio.com/docs/api/twiml/dial)
+      * [TwiML Play verb](//www.twilio.com/docs/api/twiml/dial)
+
+  .step(data-title='Where to Next?')
+    :markdown
+      ## Where to Next?
+
+      That's it! We've just implemented anonymous communications that allow your 
+      customers to connect while protecting their privacy. If you're a Node.js
+      developer working with Twilio, you might want to check out these other tutorials:
+
+      [**IVR: Phone Tree**](https://www.twilio.com/docs/tutorials/walkthrough/ivr-phone-tree/node/express)
+
+      Easily route callers to the right people and information with an IVR
+      (interactive voice response) system.
+
+      [**Automated Survey**](https://www.twilio.com/docs/tutorials/walkthrough/automated-survey/node/express)
+
+      Instantly collect structured data from your users with a survey conducted
+      over a voice call or SMS text messages. Learn how to create your own
+      survey in the language and framework of your choice.
+
+      ### Did this help?
+
+      Thanks for checking out this tutorial! If you have any feedback to share
+      with us, we'd love to hear it. Tweet
+      [@twilio](http://twitter.com/twilio) to let us know what you think.
+
+      ![Airtng](http://howtodocs.s3.amazonaws.com/airtng-screen2.png)
