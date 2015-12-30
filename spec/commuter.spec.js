@@ -53,25 +53,93 @@ describe('commuter', function () {
       });
     });
 
-    context('when the caller is the guest', function () {
-      it('connects the guest to the host using SMS', function (done) {
-        // Create a user for guest
-        agent.post('/commuter/use-sms')
-        .send({
-          From: '555 5556',
-          To:   '555 0000',
-          Body: 'awesome message'
-        })
-        .expect(200)
-        .end(function (err, res) {
-          if (err) {
-            return done(err);
-          }
-          var $ = cheerio.load(res.text);
-          expect($('Message').attr('to')).to.equal('555 5555');
-          done();
+    context('when the user sends an SMS', function () {
+      context('when the sender is the guest', function () {
+        it('connects the guest to the host', function (done) {
+          // Create a user for guest
+          agent.post('/commuter/use-sms')
+          .send({
+            From: '555 5556',
+            To:   '555 0000',
+            Body: 'awesome message'
+          })
+          .expect(200)
+          .end(function (err, res) {
+            if (err) {
+              return done(err);
+            }
+            var $ = cheerio.load(res.text);
+            expect($('Message').attr('to')).to.equal('555 5555');
+            done();
+          });
         });
-      })
+      });
+
+      context('when the sender is the host', function () {
+        it('connects the host to the guest', function (done) {
+          // Create a user for guest
+          agent.post('/commuter/use-sms')
+          .send({
+            From: '555 5555',
+            To:   '555 0000',
+            Body: 'awesome message'
+          })
+          .expect(200)
+          .end(function (err, res) {
+            if (err) {
+              return done(err);
+            }
+            var $ = cheerio.load(res.text);
+            expect($('Message').attr('to')).to.equal('555 5556');
+            done();
+          });
+        });
+      });
+    });
+
+
+    context('when the user make a call', function () {
+      context('when the caller is the guest', function () {
+        it('connects the guest to the host', function (done) {
+          // Create a user for guest
+          agent.post('/commuter/use-voice')
+          .send({
+            From: '555 5556',
+            To:   '555 0000',
+            Body: ''
+          })
+          .expect(200)
+          .end(function (err, res) {
+            if (err) {
+              return done(err);
+            }
+            var $ = cheerio.load(res.text);
+            expect($('Dial').first().text()).to.equal('555 5555');
+            done();
+          });
+        });
+      });
+
+      context('when the caller is the host', function () {
+        it('connects the host to the guest', function (done) {
+          // Create a user for guest
+          agent.post('/commuter/use-voice')
+          .send({
+            From: '555 5555',
+            To:   '555 0000',
+            Body: ''
+          })
+          .expect(200)
+          .end(function (err, res) {
+            if (err) {
+              return done(err);
+            }
+            var $ = cheerio.load(res.text);
+            expect($('Dial').first().text()).to.equal('555 5556');
+            done();
+          });
+        });
+      });
     });
   });
 });
