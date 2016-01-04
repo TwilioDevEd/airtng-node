@@ -40,14 +40,17 @@ router.post('/handle', twilio.webhook({validate: false}), function (req, res) {
 
   User.findOne({phoneNumber: from})
   .then(function (host) {
-    return Reservation.findOne({status: 'pending'});
+    return Reservation.findOne({status: 'pending'})
+    .deepPopulate('property property.owner guest')
   })
   .then(function (reservation) {
     if (reservation === null) {
       throw 'No pending reservations';
     }
 
-    var phoneNumber = purchaser.purchase('415');
+    var hostAreaCode = reservation.property.owner.areaCode;
+
+    var phoneNumber = purchaser.purchase(hostAreaCode);
     var reservationPromise = Promise.resolve(reservation);
 
     return Promise.all([phoneNumber, reservationPromise]);
