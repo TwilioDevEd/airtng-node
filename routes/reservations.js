@@ -6,6 +6,20 @@ var Reservation = require('../models/reservation');
 var User = require('../models/user');
 var notifier = require('../lib/notifier');
 var purchaser = require('../lib/purchaser');
+var middleware = require('../lib/middleware');
+
+router.get('/', middleware.isAuthenticated, function (req, res) {
+  var userId = req.user.id;
+  Reservation.find({})
+  .deepPopulate('property property.owner guest')
+  .then(function (reservations) {
+    var hostReservations = reservations.filter(function (reservation) {
+      return reservation.property.owner.id === userId;
+    });
+
+    res.render('reservations/index', { reservations: hostReservations, user: req.user });
+  });
+});
 
 // POST: /reservations
 router.post('/', function (req, res) {

@@ -1,0 +1,29 @@
+extends ../layout
+
+block hero
+  .hero-text
+    h1 Lodging fit for a captain
+    p The Next Generation of vacation rentals.
+
+block content
+  p#notice
+  .container
+    .row
+      if reservations.length !== 0
+        table.table.table-striped
+          thead
+            tr
+              th Guest Name
+              th Phone Number
+              th Message
+              th status
+          tbody
+            each reservation in reservations
+              tr
+                td= reservation.guest.username
+                td= reservation.phoneNumber
+                td= reservation.message
+                td= reservation.status
+
+      else
+        h2 Your are not hosting any reservations.
