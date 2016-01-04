@@ -35,7 +35,7 @@ describe('commuter', function () {
           message: 'reservation',
           property: property.id,
           guest: guest.id,
-          phoneNumber: '+555 0000'
+          phoneNumber: '+5550000'
         }).save(done);
       })
       .catch(function (err) {
@@ -59,8 +59,8 @@ describe('commuter', function () {
           // Create a user for guest
           agent.post('/commuter/use-sms')
           .send({
-            From: '555 5556',
-            To:   '555 0000',
+            From: '+15415555556',
+            To:   '+5550000',
             Body: 'awesome message'
           })
           .expect(200)
@@ -69,7 +69,7 @@ describe('commuter', function () {
               return done(err);
             }
             var $ = cheerio.load(res.text);
-            expect($('Message').attr('to')).to.equal('555 5555');
+            expect($('Message').attr('to')).to.equal('+15415555555');
             done();
           });
         });
@@ -80,8 +80,8 @@ describe('commuter', function () {
           // Create a user for guest
           agent.post('/commuter/use-sms')
           .send({
-            From: '555 5555',
-            To:   '555 0000',
+            From: '+15415555555',
+            To:   '+5550000',
             Body: 'awesome message'
           })
           .expect(200)
@@ -90,7 +90,7 @@ describe('commuter', function () {
               return done(err);
             }
             var $ = cheerio.load(res.text);
-            expect($('Message').attr('to')).to.equal('555 5556');
+            expect($('Message').attr('to')).to.equal('+15415555556');
             done();
           });
         });
@@ -104,8 +104,8 @@ describe('commuter', function () {
           // Create a user for guest
           agent.post('/commuter/use-voice')
           .send({
-            From: '555 5556',
-            To:   '555 0000',
+            From: '+15415555556',
+            To:   '+5550000',
             Body: ''
           })
           .expect(200)
@@ -114,7 +114,7 @@ describe('commuter', function () {
               return done(err);
             }
             var $ = cheerio.load(res.text);
-            expect($('Dial').first().text()).to.equal('555 5555');
+            expect($('Dial').first().text()).to.equal('+15415555555');
             done();
           });
         });
@@ -125,8 +125,8 @@ describe('commuter', function () {
           // Create a user for guest
           agent.post('/commuter/use-voice')
           .send({
-            From: '555 5555',
-            To:   '555 0000',
+            From: '+15415555555',
+            To:   '+5550000',
             Body: ''
           })
           .expect(200)
@@ -135,7 +135,7 @@ describe('commuter', function () {
               return done(err);
             }
             var $ = cheerio.load(res.text);
-            expect($('Dial').first().text()).to.equal('555 5556');
+            expect($('Dial').first().text()).to.equal('+15415555556');
             done();
           });
         });
