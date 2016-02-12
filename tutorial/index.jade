@@ -40,8 +40,8 @@
       ## Create a Reservation
 
       The first step in connecting a guest and host is creating a reservation.
-      Here, we handle a form submission for a new reservation which contains the
-      message, the _guest's_ information is pulled out from the logged user.
+      Here we handle a form submission for a new reservation which contains the
+      message and the _guest's_ information which is grabbed from the logged in user.
 
       ---
 
@@ -104,9 +104,9 @@
       * The `To` Twilio number that triggered this request.
 
       Take a look at [Twilio's SMS
-      Documentation](//www.twilio.com/docs/api/twiml/sms/twilio_request#request-parameters)
+      Documentation](/docs/api/twiml/sms/twilio_request#request-parameters)
       and [Twilio's Voice
-      Documentation](//www.twilio.com/docs/api/twiml/twilio_request#synchronous-request-parameters)
+      Documentation](/docs/api/twiml/twilio_request#synchronous-request-parameters)
       for a full list of the parameters you can use.
 
       In our controller we use the `to` parameter sent by Twilio to find a reservation
