@@ -8,4 +8,4 @@ env:
   global:
     - TWILIO_ACCOUNT_SID=Your-Account-SID
     - TWILIO_AUTH_TOKEN=Your-Twilio-Authy-Token
-    - TWILIO_PHONE_NUMBER=Your-Twilio-Phone-Number
+    - TWILIO_NUMBER=Your-Twilio-Phone-Number

@@ -11,7 +11,7 @@ router.use(function (req, res, next) {
 // GET /properties
 router.get('/', function (req, res) {
   Property.find().then(function (properties) {
-    res.render('properties/index', { properties });
+    res.render('properties/index', { properties: properties });
   });
 });
 
@@ -26,7 +26,7 @@ router.get('/new', middleware.isAuthenticated, function (req, res) {
 router.get('/:id', middleware.isAuthenticated, function (req, res) {
   var propertyId = req.params.id;
   Property.findOne({ _id: propertyId }).then(function (property) {
-    res.render('properties/show', { property });
+    res.render('properties/show', { property: property });
   });
 });
 
@@ -36,7 +36,7 @@ router.post('/', middleware.isAuthenticated, function (req, res) {
   var imageUrl = req.body.imageUrl;
   var user = req.user;
 
-  var property = new Property({ description, imageUrl, owner: user.id });
+  var property = new Property({ description: description, imageUrl: imageUrl, owner: user.id });
   property.save()
   .then(function (savedProperty) {
     res.redirect('/properties/' + savedProperty.id);
@@ -47,7 +47,7 @@ router.post('/', middleware.isAuthenticated, function (req, res) {
 router.get('/:id/edit', middleware.isAuthenticated, function (req, res) {
   var propertyId = req.params.id;
   Property.findOne({ _id: propertyId }).then(function (property) {
-    res.render('properties/edit', { property });
+    res.render('properties/edit', { property: property });
   });
 });
 
