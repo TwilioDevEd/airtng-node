@@ -4,6 +4,8 @@
 
 Protect your customers' privacy, and create a seamless interaction by provisioning Twilio numbers on the fly, and routing all voice calls, and messages through your very own 3rd party. This allows you to control the interaction between your customers, while putting your customer's privacy first.
 
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/masked-numbers/node/express)!
+
 ## Configure Twilio to call your webhooks
 
 You will need to configure Twilio to send requests to your application when SMS are received.
