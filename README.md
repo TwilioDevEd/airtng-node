@@ -4,6 +4,8 @@
 
 Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This example app is a vacation rental site, where the host can confirm a reservation via SMS.
 
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/workflow-automation/node/express)!
+
 ## Local Development
 
 1. You will need to configure Twilio to send requests to your application when SMS are received.
