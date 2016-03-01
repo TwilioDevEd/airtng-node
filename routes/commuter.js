@@ -15,7 +15,7 @@ router.post('/use-sms', twilio.webhook({ validate: false }), function (req, res)
     twiml.message(body, { to: outgoingPhoneNumber });
 
     res.type('text/xml');
-    res.send(twiml);
+    res.send(twiml.toString());
   })
 });
 
@@ -32,7 +32,7 @@ router.post('/use-voice', twilio.webhook({ validate: false }), function (req, re
     twiml.dial(outgoingPhoneNumber);
 
     res.type('text/xml');
-    res.send(twiml);
+    res.send(twiml.toString());
   })
 });
 

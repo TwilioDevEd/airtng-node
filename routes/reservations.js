@@ -101,7 +101,7 @@ var respond = function(res, message) {
   twiml.message(message);
 
   res.type('text/xml');
-  res.send(twiml);
+  res.send(twiml.toString());
 }
 
 module.exports = router;
