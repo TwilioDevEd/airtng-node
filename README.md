@@ -17,11 +17,13 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
    ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
 
    To start using `ngrok` in our project you'll have execute to the following line in the _terminal_.
+
    ```
    $ ngrok http 3000
    ```
 
-   Bear in mind that our endpoint is:
+   Keep in mind that our endpoint is:
+
    ```
    http://<your-ngrok-subdomain>.ngrok.io/reservations/handle
    ```
@@ -39,13 +41,15 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
    $ mongod
    ```
 
-3. Clone this repository and `cd` into its directory:
+3. Clone this repository and `cd` into it.
+
    ```
    $ git clone git@github.com:TwilioDevEd/airtng-node.git
    $ cd airtng-node
    ```
 
-4. Install dependencies:
+4. Install the dependencies.
+
    ```
    $ npm install
    ```
