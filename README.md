@@ -1,27 +1,29 @@
-# AirTNG App: Part 1 - Workflow Automation with Twilio with Node.js and Express
+# Airtng App: Part 2 - Masked Numbers With Twilio - Laravel
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/airtng-node.svg?branch=masked-numbers)](https://travis-ci.org/TwilioDevEd/airtng-node)
 
-Protect your customers' privacy, and create a seamless interaction by provisioning Twilio numbers on the fly, and routing all voice calls, and messages through your very own 3rd party. This allows you to control the interaction between your customers, while putting your customer's privacy first.
+Protect your customers' privacy by creating a seamless interaction by provisioning Twilio numbers on the fly. Route all voice calls and messages through your very own 3rd party. This allows you to control the interaction between your customers while putting your customer's privacy first.
 
 [Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/masked-numbers/node/express)!
 
 ## Configure Twilio to call your webhooks
 
-You will need to configure Twilio to send requests to your application when SMS are received.
+You will need to configure Twilio to send requests to your application when SMSs are received.
 
-You will need to provision at least one Twilio number with sms capabilities so the application's users can make property reservations. You can buy a number [right here](https://www.twilio.com/user/account/phone-numbers/search). Once you have a number you need to configure your number to work with your application. Open [the number management page](https://www.twilio.com/user/account/phone-numbers/incoming) and open a number's configuration by clicking on it.
+You will need to provision at least one Twilio number with SMS capabilities so the application's users can make property reservations. You can buy a number [right here](https://www.twilio.com/user/account/phone-numbers/search). Once you have a number you need to configure it to work with your application. Open [the number management page](https://www.twilio.com/user/account/phone-numbers/incoming) and open a number's configuration by clicking on it.
 
-Remember that the number where you change the _SMS webhook_ must be the same one you set on the `TwilioPhoneNumber` setting.
+Remember that the number where you change the _SMS webhook_ must be the same one you set on the `TwilioPhoneNumber` settings.
 
 ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
 
- To start using `ngrok` in our project you'll have execute to the following line in the _command prompt_:
+ To start using `ngrok` in our project you'll have execute to the following line in the _command prompt_.
+
 ```
 ngrok http 3000
 ```
 
-Bear in mind that our endpoint is:
+Keep in mind that our endpoint is:
+
 ```
 http://<your-ngrok-subdomain>.ngrok.io/reservations/handle
 ```
@@ -35,11 +37,11 @@ Create a new TwiML app at https://www.twilio.com/user/account/apps/add and use i
 
 ![Creating a TwiML App](http://howtodocs.s3.amazonaws.com/call-tracking-twiml-app.gif)
 
-Once you have created your TwiML app, configure your Twilio phone number to use it ([instructions here](https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app)).
+Once you have created your TwiML app configure your Twilio phone number to use it ([instructions here](https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app)).
 
 If you don't have a Twilio phone number yet, you can purchase a new number in your [Twilio Account Dashboard](https://www.twilio.com/user/account/phone-numbers/incoming).
 
-You'll need to update your TwiML app's voice and SMS URL setting to use your `ngrok` hostname, so it will look something like this:
+You'll need to update your TwiML app's voice and SMS URL setting to use your `ngrok` hostname. It will look something like this:
 ```
 http://<your-ngrok-subdomain>.ngrok.io/commuter/use-sms
 http://<your-ngrok-subdomain>.ngrok.io/commuter/use-voice
@@ -61,7 +63,8 @@ http://<your-ngrok-subdomain>.ngrok.io/commuter/use-voice
    $ mongod
    ```
 
-2. Clone this repository and `cd` into its directory:
+2. Clone this repository and `cd` into it.
+
    ```
    $ git clone git@github.com:TwilioDevEd/airtng-node.git
    $ cd airtng-node
