@@ -1,3 +1,7 @@
+<a href="https://www.twilio.com">
+  <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
+</a>
+
 # AirTNG App: Part 1 - Workflow Automation with Twilio with Node.js and Express
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/airtng-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/airtng-node)
@@ -16,7 +20,7 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
 
    ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
 
-   To start using `ngrok` in our project you'll have execute to the following line in the _terminal_.
+   To start using `ngrok` in our project you'll have to execute to the following line in the _terminal_.
 
    ```
    $ ngrok http 3000
@@ -56,6 +60,10 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
 
 5. Edit the sample configuration file `.env` to match your configuration.
 
+  You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in your
+   [Twilio Account Settings](https://www.twilio.com/console).
+   You will also need a `TWILIO_PHONE_NUMBER`, which you may find [here](https://www.twilio.com/console/phone-numbers/incoming).
+
    Once you have edited the `.env` file, if you are using a UNIX operating system, just use the source command to load the variables into your environment:
 
   ```
@@ -73,6 +81,14 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
 That's it!
 
 To let our Twilio Phone number use the callback endpoint we exposed, our development server will need to be publicly accessible. [We recommend using ngrok to solve this problem](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html).
+
+## Run the tests
+
+You can run the tests locally by typing
+
+```bash
+$ npm test
+```
 
 ## Meta
 
