@@ -14,7 +14,7 @@ Protect your customers' privacy by creating a seamless interaction by provisioni
 
 1. You will need to configure Twilio to send requests to your application when SMSs are received.
 
-  You will need to provision at least one Twilio number with SMS capabilities so the application's users can make property reservations. You can buy a number [right here](https://www.twilio.com/user/account/phone-numbers/search). Once you have a number you need to configure it to work with your application. Open [the number management page](https://www.twilio.com/user/account/phone-numbers/incoming) and open a number's configuration by clicking on it.
+  You will need to provision at least one Twilio number with SMS capabilities so the application's users can make property reservations. You can buy a number on the [phone numbers search page](https://www.twilio.com/user/account/phone-numbers/search). Once you have a number you need to configure it to work with your application. Open [the number management page](https://www.twilio.com/user/account/phone-numbers/incoming) and open a number's configuration by clicking on it.
 
   Remember that the number where you change the _SMS webhook_ must be the same one you set on the `TwilioPhoneNumber` settings.
 
@@ -22,13 +22,13 @@ Protect your customers' privacy by creating a seamless interaction by provisioni
 
    To start using `ngrok` in our project you'll have execute to the following line in the _command prompt_.
 
-  ```
+  ```bash
   ngrok http 3000
   ```
 
   Keep in mind that our endpoint is:
 
-  ```
+  ```bash
   http://<your-ngrok-subdomain>.ngrok.io/reservations/handle
   ```
 
@@ -43,6 +43,7 @@ Protect your customers' privacy by creating a seamless interaction by provisioni
   If you don't have a Twilio phone number yet, you can purchase a new number in your [Twilio Account Dashboard](https://www.twilio.com/user/account/phone-numbers/incoming).
 
   You'll need to update your TwiML app's voice and SMS URL setting to use your `ngrok` hostname. It will look something like this:
+
   ```
   http://<your-ngrok-subdomain>.ngrok.io/commuter/use-sms
   http://<your-ngrok-subdomain>.ngrok.io/commuter/use-voice
@@ -52,18 +53,18 @@ Protect your customers' privacy by creating a seamless interaction by provisioni
 
    On OS X, maybe the easiest way to get MongoDB running locally is to install via [Homebrew](http://brew.sh/).
 
-   ```
+   ```bash
    $ brew install mongodb
    ```
    You should then be able to run a local server with:
 
-   ```
+   ```bash
    $ mongod
    ```
 
 1. Clone this repository and `cd` into it.
 
-   ```
+   ```bash
    $ git clone git@github.com:TwilioDevEd/airtng-node.git
    $ cd airtng-node
    ```
@@ -82,7 +83,8 @@ Protect your customers' privacy by creating a seamless interaction by provisioni
   Use the TwiML app `Sid` obtained in step **2** in the `TWIML_APPLICATION_SID` variable.  
 
 1. Install dependencies:
-   ```
+
+   ```bash
    $ npm install
    ```
 
@@ -94,7 +96,7 @@ Protect your customers' privacy by creating a seamless interaction by provisioni
 
 1. Run the application.
 
-  ```
+  ```bash
   $ npm start
   ```
 
