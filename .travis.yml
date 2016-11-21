@@ -5,7 +5,7 @@ node_js:
 services: mongodb
 env:
   global:
-    - TWILIO_ACCOUNT_SID=Your-Account-SID
+    - TWILIO_ACCOUNT_SID=ACYour-Account-SID
     - TWILIO_AUTH_TOKEN=Your-Twilio-Authy-Token
     - TWILIO_NUMBER=Your-Twilio-Phone-Number
     - TWIML_APPLICATION_SID=Your-Twiml-Application_SID
