@@ -22,8 +22,8 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
 
    To start using `ngrok` in our project you'll have to execute to the following line in the _terminal_.
 
-   ```
-   $ ngrok http 3000
+   ```bash
+   ngrok http 3000
    ```
 
    Keep in mind that our endpoint is:
@@ -36,29 +36,33 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
 
    On OS X, maybe the easiest way to get MongoDB running locally is to install via [Homebrew](http://brew.sh/).
 
-   ```
-   $ brew install mongodb
+   ```bash
+   brew install mongodb
    ```
    You should then be able to run a local server with:
 
-   ```
-   $ mongod
+   ```bash
+   mongod
    ```
 
 3. Clone this repository and `cd` into it.
 
-   ```
-   $ git clone git@github.com:TwilioDevEd/airtng-node.git
-   $ cd airtng-node
+   ```bash
+   git clone git@github.com:TwilioDevEd/airtng-node.git
+   cd airtng-node
    ```
 
 4. Install the dependencies.
 
-   ```
-   $ npm install
+   ```bash
+   npm install
    ```
 
-5. Edit the sample configuration file `.env` to match your configuration.
+5. Copy the sample configuration `.env.example` to `.env`, and then edit `.env` to match your configuration.
+
+  ```bash
+  cp .env.example .env
+  ```
 
   You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in your
    [Twilio Account Settings](https://www.twilio.com/console).
@@ -66,14 +70,14 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
 
    Once you have edited the `.env` file, if you are using a UNIX operating system, just use the source command to load the variables into your environment:
 
-  ```
-  $ source .env
+  ```bash
+  source .env
   ```
 
 6. Run the application.
 
-  ```
-  $ npm start
+  ```bash
+  npm start
   ```
 
 7. Check it out at [http://localhost:3000](http://localhost:3000)
@@ -87,7 +91,7 @@ To let our Twilio Phone number use the callback endpoint we exposed, our develop
 You can run the tests locally by typing
 
 ```bash
-$ npm test
+npm test
 ```
 
 ## Meta
