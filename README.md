@@ -1,4 +1,4 @@
-# Airtng App: Part 2 - Masked Numbers With Twilio - Laravel
+# Airtng App: Part 2 - Masked Numbers With Twilio - Node.js/Express
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/airtng-node.svg?branch=masked-numbers)](https://travis-ci.org/TwilioDevEd/airtng-node)
 
