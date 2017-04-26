@@ -45,7 +45,6 @@ router.post('/handle', twilio.webhook({validate: false}), function (req, res) {
     if (reservation === null) {
       throw 'No pending reservations';
     }
-
     reservation.status = smsRequest.toLowerCase() === "accept" ? "confirmed" : "rejected";
     return reservation.save();
   })
