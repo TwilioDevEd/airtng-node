@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "export NODE_ENV=test && mocha spec"
+    "test": "export TWILIO_NUMBER=Your-Twilio-Phone-Number TWILIO_AUTH_TOKEN=Your-Twilio-Authy-Token TWILIO_ACCOUNT_SID=ACYour-Account-SID NODE_ENV=test && node_modules/.bin/mocha spec"
   },
   "engines": {
-    "node": ">=4.1.0 <5.5.0"
+    "node": ">=6.x"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -26,7 +26,7 @@
     "passport-local-mongoose": "^3.1.0",
     "passport-stub": "^1.0.1",
     "serve-favicon": "~2.3.0",
-    "twilio": ">=3.0.0-rc.16 < 3.1.0"
+    "twilio": "~3.0.0-rc.16"
   },
   "devDependencies": {
     "chai": "^3.4.1",
