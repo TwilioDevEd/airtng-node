@@ -1,4 +1,5 @@
 var twilio = require('twilio');
+var MessagingResponse = require('twilio').twiml.MessagingResponse;
 var express = require('express');
 var router = express.Router();
 var Property = require('../models/property');
@@ -97,11 +98,11 @@ var isSmsRequestAccepted = function (smsRequest) {
 };
 
 var respond = function(res, message) {
-  var twiml = new twilio.TwimlResponse();
-  twiml.message(message);
+  var messagingResponse = new MessagingResponse();
+  messagingResponse.message(message);
 
   res.type('text/xml');
-  res.send(twiml.toString());
+  res.send(messagingResponse.toString());
 }
 
 module.exports = router;

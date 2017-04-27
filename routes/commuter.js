@@ -1,4 +1,6 @@
 var twilio = require('twilio');
+var VoiceResponse = require('twilio').twiml.VoiceResponse;
+var MessagingResponse = require('twilio').twiml.MessagingResponse;
 var express = require('express');
 var router = express.Router();
 var Reservation = require('../models/reservation');
@@ -11,11 +13,11 @@ router.post('/use-sms', twilio.webhook({ validate: false }), function (req, res)
 
   gatherOutgoingNumber(from, to)
   .then(function (outgoingPhoneNumber) {
-    var twiml = new twilio.TwimlResponse();
-    twiml.message(body, { to: outgoingPhoneNumber });
+    var messagingResponse = new MessagingResponse();
+    messagingResponse.message({ to: outgoingPhoneNumber }, body);
 
     res.type('text/xml');
-    res.send(twiml.toString());
+    res.send(messagingResponse.toString());
   })
 });
 
@@ -27,12 +29,12 @@ router.post('/use-voice', twilio.webhook({ validate: false }), function (req, re
 
   gatherOutgoingNumber(from, to)
   .then(function (outgoingPhoneNumber) {
-    var twiml = new twilio.TwimlResponse();
-    twiml.play('http://howtodocs.s3.amazonaws.com/howdy-tng.mp3');
-    twiml.dial(outgoingPhoneNumber);
+    var voiceResponse = new VoiceResponse();
+    voiceResponse.play('http://howtodocs.s3.amazonaws.com/howdy-tng.mp3');
+    voiceResponse.dial(outgoingPhoneNumber);
 
     res.type('text/xml');
-    res.send(twiml.toString());
+    res.send(voiceResponse.toString());
   })
 });
 

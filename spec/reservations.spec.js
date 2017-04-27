@@ -1,4 +1,5 @@
 require('./connectionHelper');
+var app = require('../app.js');
 var expect = require('chai').expect;
 var supertest = require('supertest');
 var xpath = require('xpath');
@@ -7,7 +8,6 @@ var proxyquire =  require('proxyquire')
 var sinon = require('sinon');
 var agent = supertest(app);
 
-var app = require('../app.js');
 var Property = require('../models/property');
 var Reservation = require('../models/reservation');
 var User = require('../models/user');
