@@ -53,43 +53,43 @@ router.post('/handle', twilio.webhook({validate: false}), function (req, res) {
   var smsResponse;
 
   User.findOne({phoneNumber: from})
-  .then(function (host) {
-    return Reservation.findOne({status: 'pending'})
-    .deepPopulate('property property.owner guest')
-  })
-  .then(function (reservation) {
-    if (reservation === null) {
-      throw 'No pending reservations';
-    }
+    .then(function (host) {
+      return Reservation.findOne({status: 'pending'})
+        .deepPopulate('property property.owner guest')
+    })
+    .then(function (reservation) {
+      if (reservation === null) {
+        throw 'No pending reservations';
+      }
 
-    var hostAreaCode = reservation.property.owner.areaCode;
+      var hostAreaCode = reservation.property.owner.areaCode;
 
-    var phoneNumber = purchaser.purchase(hostAreaCode);
-    var reservationPromise = Promise.resolve(reservation);
+      var phoneNumber = purchaser.purchase(hostAreaCode);
+      var reservationPromise = Promise.resolve(reservation);
 
-    return Promise.all([phoneNumber, reservationPromise]);
-  })
-  .then(function (data) {
-    var phoneNumber = data[0];
-    var reservation = data[1];
+      return Promise.all([phoneNumber, reservationPromise]);
+    })
+    .then(function (data) {
+      var phoneNumber = data[0];
+      var reservation = data[1];
 
-    if (isSmsRequestAccepted(smsRequest)) {
-      reservation.status = "confirmed";
-      reservation.phoneNumber = phoneNumber;
-    } else {
-      reservation.status = "rejected";
-    }
-    return reservation.save();
-  })
-  .then(function (reservation) {
-    var message = "You have successfully " + reservation.status + " the reservation";
-    respond(res, message);
-  })
-  .catch(function (err) {
-    console.log(err);
-    var message = "Sorry, it looks like you do not have any reservations to respond to";
-    respond(res, message);
-  });
+      if (isSmsRequestAccepted(smsRequest)) {
+        reservation.status = "confirmed";
+        reservation.phoneNumber = phoneNumber;
+      } else {
+        reservation.status = "rejected";
+      }
+      return reservation.save();
+    })
+    .then(function (reservation) {
+      var message = "You have successfully " + reservation.status + " the reservation";
+      respond(res, message);
+    })
+    .catch(function (err) {
+      console.log(err);
+      var message = "Sorry, it looks like you do not have any reservations to respond to";
+      respond(res, message);
+    });
 });
 
 var isSmsRequestAccepted = function (smsRequest) {
