@@ -1,3 +1,4 @@
+var MessagingResponse = require('twilio').twiml.MessagingResponse;
 var twilio = require('twilio');
 var express = require('express');
 var router = express.Router();
@@ -45,7 +46,6 @@ router.post('/handle', twilio.webhook({validate: false}), function (req, res) {
     if (reservation === null) {
       throw 'No pending reservations';
     }
-
     reservation.status = smsRequest.toLowerCase() === "accept" ? "confirmed" : "rejected";
     return reservation.save();
   })
@@ -60,11 +60,11 @@ router.post('/handle', twilio.webhook({validate: false}), function (req, res) {
 });
 
 var respond = function(res, message) {
-  var twiml = new twilio.TwimlResponse();
-  twiml.message(message);
+  var messagingResponse = new MessagingResponse();
+  messagingResponse.message({}, message);
 
   res.type('text/xml');
-  res.send(twiml.toString());
+  res.send(messagingResponse.toString());
 }
 
 module.exports = router;
