@@ -18,7 +18,7 @@
     "express-session": "^1.12.1",
     "jade": "~1.11.0",
     "kerberos": "~0.0.17",
-    "mongoose": "^4.3.1",
+    "mongoose": "^5.8.1",
     "mongoose-deep-populate": "^2.0.3",
     "morgan": "~1.6.1",
     "passport": "^0.3.2",
