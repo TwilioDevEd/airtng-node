@@ -23,7 +23,7 @@
     "morgan": "~1.6.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^3.1.0",
+    "passport-local-mongoose": "^6.0.1",
     "passport-stub": "^1.0.1",
     "serve-favicon": "~2.3.0",
     "twilio": "~3.0.0-rc.16"
