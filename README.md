@@ -3,6 +3,7 @@
 </a>
 
 # AirTNG App: Part 1 - Workflow Automation with Twilio with Node.js and Express
+> We are currently in the process of updating this sample template. If you are encountering any issues with the sample, please open an issue at [github.com/twilio-labs/code-exchange/issues](https://github.com/twilio-labs/code-exchange/issues) and we'll try to help you.
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/airtng-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/airtng-node)
 
