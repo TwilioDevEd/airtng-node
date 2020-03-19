@@ -94,5 +94,9 @@ function onListening() {
  * Initialize database connection.
  */
 
-mongoose.connect('mongodb://localhost/airtng');
+mongoose.connect('mongodb://localhost/airtng', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+mongoose.set('useUnifiedTopology', true);
 mongoose.Promise = Promise;
