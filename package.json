@@ -20,7 +20,7 @@
     "kerberos": "~0.0.17",
     "mongoose": "^4.3.1",
     "mongoose-deep-populate": "^2.0.3",
-    "morgan": "~1.6.1",
+    "morgan": "~1.10.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^3.1.0",
