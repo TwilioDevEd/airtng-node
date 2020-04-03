@@ -7,14 +7,15 @@ var router = express.Router();
 
 // GET: /sessions/login
 router.get('/login', function(req, res) {
-  res.render('login');
+  res.render('login', { message: req.flash('error') });
 });
 
 // POST: /sessions/login
 router.post('/login',
             passport.authenticate('local', {
               successRedirect: '/',
-              failureRedirect: '/sessions/login'
+              failureRedirect: '/sessions/login',
+              failureFlash: true 
             }), function(req, res) {
               req.session.save(function (err) {
                 if (err) {

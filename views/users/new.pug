@@ -6,20 +6,21 @@ block nav_bg
 block content
   .container
     h1 Sign up for Airtng
+    div #{message}
     form(action="/users",method="post")
       .form-group
         label Tell us your name:
-        input.form-control(type='text', name="username", placeholder='Zingelbert Bembledack')
+        input.form-control(type='text', name="username", placeholder='Zingelbert Bembledack', required)
       .form-group
         label Enter Your E-mail Address:
-        input.form-control(type='text', name="email", placeholder='me@mydomain.com')
+        input.form-control(type='text', name="email", placeholder='me@mydomain.com', required)
       .form-group
         label Enter a password:
-        input.form-control(type='password', name="password")
+        input.form-control(type='password', name="password", required)
       .form-group
         label Country code:
         input#authy-countries.form-control(type='text', name="countryCode")
       .form-group
         label Phone number:
-        input.form-control(type='text', name="phoneNumber")
+        input.form-control(type='text', name="phoneNumber", required)
       button.btn.btn-primary(type='submit') Sign up

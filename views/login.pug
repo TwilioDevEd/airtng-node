@@ -6,11 +6,12 @@ block nav_bg
 block content
   .container
     h1 Login in
+    div #{message}
     form(action="/sessions/login",method="post")
       .form-group
         label User name:
-        input.form-control(type='text', name="username")
+        input.form-control(type='text', name="username", required)
       .form-group
         label Password:
-        input.form-control(type='password', name="password")
+        input.form-control(type='password', name="password", required)
       button.btn.btn-default(type='submit') Log In

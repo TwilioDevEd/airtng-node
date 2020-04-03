@@ -7,7 +7,7 @@ var router = express.Router();
 
 // GET: /users/new
 router.get('/new', function(req, res) {
-  res.render('users/new');
+  res.render('users/new', { message: req.flash('error') });
 });
 
 // POST: /users
@@ -19,8 +19,8 @@ router.post('/', function(req, res) {
     phoneNumber: req.body.phoneNumber
   }), req.body.password, function(err, user) {
     if (err) {
-      console.log(err);
-      return res.send(user);
+      req.flash('error', 'Could not register the user')
+      return res.redirect('/users/new');
     }
 
     passport.authenticate('local')(req, res, function () {
