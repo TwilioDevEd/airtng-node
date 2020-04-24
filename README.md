@@ -5,7 +5,7 @@
 # AirTNG App: Part 1 - Workflow Automation with Twilio with Node.js and Express
 > We are currently in the process of updating this sample template. If you are encountering any issues with the sample, please open an issue at [github.com/twilio-labs/code-exchange/issues](https://github.com/twilio-labs/code-exchange/issues) and we'll try to help you.
 
-[![Build Status](https://travis-ci.org/TwilioDevEd/airtng-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/airtng-node)
+![](https://github.com/TwilioDevEd/airtng-node/workflows/Node.js/badge.svg)
 
 Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This example app is a vacation rental site, where the host can confirm a reservation via SMS.
 
@@ -19,7 +19,7 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
 
    Remember that the number where you change the _SMS webhook_ must be the same one you set on the `TwilioPhoneNumber` setting.
 
-   ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
+   ![Configure Messaging](webhook.png)
 
    To start using `ngrok` in our project you'll have to execute to the following line in the _terminal_.
 
@@ -69,12 +69,6 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
    [Twilio Account Settings](https://www.twilio.com/console).
    You will also need a `TWILIO_PHONE_NUMBER`, which you may find [here](https://www.twilio.com/console/phone-numbers/incoming).
 
-   Once you have edited the `.env` file, if you are using a UNIX operating system, just use the source command to load the variables into your environment:
-
-  ```bash
-  source .env
-  ```
-
 6. Run the application.
 
   ```bash
@@ -98,5 +92,6 @@ npm test
 ## Meta
 
 * No warranty expressed or implied. Software is as is. Diggity.
+* The CodeExchange repository can be found [here](https://github.com/twilio-labs/code-exchange/).
 * [MIT License](http://www.opensource.org/licenses/mit-license.html)
 * Lovingly crafted by Twilio Developer Education.

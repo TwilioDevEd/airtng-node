@@ -15,22 +15,22 @@ var dom = require('xmldom').DOMParser;
 
 describe('reservations', function () {
   after(function(done) {
-    User.remove({})
+    User.deleteMany({})
       .then(function(){
-        return Property.remove({})
+        return Property.deleteMany({})
       })
       .then(function() {
-        Reservation.remove({}, done);
+        Reservation.deleteMany({}, done);
       });
   });
 
   beforeEach(function(done) {
-    User.remove({})
+    User.deleteMany({})
       .then(function(){
-        return Property.remove({})
+        return Property.deleteMany({})
       })
       .then(function() {
-        Reservation.remove({}, done);
+        Reservation.deleteMany({}, done);
       });
   });
 

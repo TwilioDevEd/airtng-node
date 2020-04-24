@@ -15,17 +15,17 @@ var agent = supertest(app);
 
 describe('properties', function () {
   after(function(done) {
-    Property.remove({})
+    Property.deleteMany({})
       .then(function () {
-        User.remove({}, done);
+        User.deleteMany({}, done);
       });
   });
 
   beforeEach(function(done) {
     passportStub.login({username: 'Bob'});
-    Property.remove({})
+    Property.deleteMany({})
       .then(function () {
-        User.remove({}, done);
+        User.deleteMany({}, done);
       });
   });
 
