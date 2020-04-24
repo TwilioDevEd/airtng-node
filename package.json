@@ -30,7 +30,7 @@
     "twilio": "^3.41.1"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
+    "chai": "^4.2.0",
     "mocha": "^7.1.1",
     "supertest": "^4.0.2",
     "xmldom": "^0.1.27",
