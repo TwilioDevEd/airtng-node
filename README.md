@@ -33,18 +33,7 @@ Learn how to automate your workflow using Twilio's REST API and Twilio SMS. This
    http://<your-ngrok-subdomain>.ngrok.io/reservations/handle
    ```
 
-2. This sample application stores data in a [MongoDB](https://www.mongodb.org/) database using [Mongoose](http://mongoosejs.com/). You can download and run MongoDB yourself (OS X, Linux, Windows).
-
-   On OS X, maybe the easiest way to get MongoDB running locally is to install via [Homebrew](http://brew.sh/).
-
-   ```bash
-   brew install mongodb
-   ```
-   You should then be able to run a local server with:
-
-   ```bash
-   mongod
-   ```
+2. This sample application stores data in a [MongoDB](https://www.mongodb.org/). You should install it following the instruccions [here](https://docs.mongodb.com/manual/installation/).
 
 3. Clone this repository and `cd` into it.
 
