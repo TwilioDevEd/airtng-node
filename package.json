@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "chai": "^3.4.1",
-    "mocha": "^7.1.1",
+    "mocha": "^7.2.0",
     "supertest": "^4.0.2",
     "xmldom": "^0.1.27",
     "xpath": "0.0.24"
