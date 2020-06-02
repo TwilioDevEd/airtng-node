@@ -1,14 +1,12 @@
-# Dockerfile for lead-alerts-node
+FROM node:10
 
-FROM node:latest
+WORKDIR /usr/src/app
 
-RUN mkdir -p /usr/src
-COPY . /usr/src
-WORKDIR /usr/src
+COPY package*.json ./
 
 RUN npm install
 
-RUN npm test
+COPY . .
 
 EXPOSE 3000
 

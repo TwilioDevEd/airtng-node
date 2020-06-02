@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  app:
+    container_name: app
+    restart: always
+    build: .
+    environment:
+      - DOCKER_MONGO=mongo
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports: 
+      - "27018:27017"
