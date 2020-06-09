@@ -94,7 +94,9 @@ function onListening() {
  * Initialize database connection.
  */
 
-mongoose.connect('mongodb://localhost/airtng', {
+var mongoConnection = process.env.DOCKER_MONGO || "localhost"
+
+mongoose.connect('mongodb://' + mongoConnection + '/airtng', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
