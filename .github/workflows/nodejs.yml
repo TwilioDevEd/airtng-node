@@ -11,13 +11,12 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
-    
+        node-version: [10, 12]
+        platform: [windows-latest, macos-latest, ubuntu-latest]
+
     services:
       mongodb:
         image: mongo:3.4.23
