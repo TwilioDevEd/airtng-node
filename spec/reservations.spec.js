@@ -1,4 +1,4 @@
-require('./connectionHelper');
+const dbHandler = require('./db-handler');
 var expect = require('chai').expect;
 var supertest = require('supertest');
 
@@ -14,24 +14,11 @@ var xpath = require('xpath');
 var dom = require('xmldom').DOMParser;
 
 describe('reservations', function () {
-  after(function(done) {
-    User.deleteMany({})
-      .then(function(){
-        return Property.deleteMany({})
-      })
-      .then(function() {
-        Reservation.deleteMany({}, done);
-      });
-  });
+  before(async () => await dbHandler.connect());
 
-  beforeEach(function(done) {
-    User.deleteMany({})
-      .then(function(){
-        return Property.deleteMany({})
-      })
-      .then(function() {
-        Reservation.deleteMany({}, done);
-      });
+  after(async () => {
+    await dbHandler.clearDatabase();
+    await dbHandler.closeDatabase()
   });
 
   describe('POST /reservations', function () {

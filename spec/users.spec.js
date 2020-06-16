@@ -1,11 +1,18 @@
+const dbHandler = require('./db-handler');
 var expect = require('chai').expect
   , supertest = require('supertest')
-  , mongoose = require('mongoose')
   , app = require('../app')
 
 var agent = supertest(app);
 
 describe('users', function () {
+  before(async () => await dbHandler.connect());
+
+  after(async () => {
+    await dbHandler.clearDatabase();
+    await dbHandler.closeDatabase()
+  });
+
   describe('GET /users/new', function () {
     it('shows registration form', function (done) {
       agent

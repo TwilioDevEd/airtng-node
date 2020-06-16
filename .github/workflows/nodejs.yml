@@ -14,7 +14,7 @@ jobs:
     runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
-        node-version: [10, 12]
+        node-version: [10.x, 12.x]
         platform: [windows-latest, macos-latest, ubuntu-latest]
         mongodb-version: [3.6]
 
@@ -24,11 +24,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Start MongoDB v${{ matrix.mongodb-version }}
-      uses: supercharge/mongodb-github-action@1.3.0
-      with:
-        mongodb-version: ${{ matrix.mongodb-version }}
     - run: npm ci
     - run: npm test
       env:
         CI: true
+        TWILIO_ACCOUNT_SID: ACXXXXXX
+        TWILIO_AUTH_TOKEN: XXXXX
+        TWILIO_NUMBER: +1555555
