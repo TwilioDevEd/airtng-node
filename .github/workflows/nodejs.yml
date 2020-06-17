@@ -11,21 +11,15 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
         node-version: [10.x, 12.x]
-    
-    services:
-      mongodb:
-        image: mongo:3.4.23
-        ports:
-          - 27017:27017
+        platform: [windows-latest, macos-latest, ubuntu-latest]
+        mongodb-version: [3.6]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -34,3 +28,6 @@ jobs:
     - run: npm test
       env:
         CI: true
+        TWILIO_ACCOUNT_SID: ACXXXXXX
+        TWILIO_AUTH_TOKEN: XXXXX
+        TWILIO_NUMBER: +1555555

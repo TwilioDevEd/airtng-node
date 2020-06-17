@@ -1,4 +1,4 @@
-require('./connectionHelper');
+const dbHandler = require('./db-handler');
 var passport = require('passport');
 var passportStub = require('passport-stub');
 var expect = require('chai').expect;
@@ -14,19 +14,15 @@ var imageUrl = 'http://images.com/example.png';
 var agent = supertest(app);
 
 describe('properties', function () {
-  after(function(done) {
-    Property.deleteMany({})
-      .then(function () {
-        User.deleteMany({}, done);
-      });
+  before(async () => await dbHandler.connect());
+
+  after(async () => {
+    await dbHandler.clearDatabase();
+    await dbHandler.closeDatabase()
   });
 
-  beforeEach(function(done) {
+  beforeEach(function() {
     passportStub.login({username: 'Bob'});
-    Property.deleteMany({})
-      .then(function () {
-        User.deleteMany({}, done);
-      });
   });
 
   describe('GET /properties', function () {
