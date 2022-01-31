@@ -25,9 +25,9 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^3.1.0",
     "passport-stub": "^1.0.1",
-    "pug": "2.0.4",
+    "pug": "3.0.0",
     "serve-favicon": "^2.5.0",
-    "twilio": "^3.41.1"
+    "twilio": "^3.54.2"
   },
   "devDependencies": {
     "chai": "^3.4.1",
