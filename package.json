@@ -27,7 +27,7 @@
     "passport-stub": "^1.0.1",
     "pug": "2.0.4",
     "serve-favicon": "^2.5.0",
-    "twilio": "^3.41.1"
+    "twilio": "^3.84.1"
   },
   "devDependencies": {
     "chai": "^3.4.1",
